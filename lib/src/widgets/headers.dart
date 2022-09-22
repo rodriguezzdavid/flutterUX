@@ -19,10 +19,11 @@ class HeaderBordesRedondeados extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Transform.rotate(
-      angle: 0.50,
+    return //Transform.rotate(
+      //angle: 0.50,
       
-      child: Container(
+      //child: 
+      Container(
         width: 5,
         height: 3,
 
@@ -34,15 +35,15 @@ class HeaderBordesRedondeados extends StatelessWidget {
             bottomRight: Radius.circular(320)
          )
         ),
-      ),
+      );
 
-    );
+    //);
   
   }
 }
 
-class HeaderDiagonal extends StatelessWidget {
-  const HeaderDiagonal({super.key});
+class HeaderWithCustomPainter extends StatelessWidget {
+  const HeaderWithCustomPainter({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class HeaderDiagonal extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       child: CustomPaint( 
-        painter: _HeaderDiagonalPainter(),
+        painter: _HeaderTriangularPainter(),
       ),
     );
   }
@@ -71,18 +72,43 @@ class _HeaderDiagonalPainter extends CustomPainter {
 
     //Dibujar con el path y el lapiz
     path.moveTo( 0 , size.height * 0.35);
-    path.lineTo(size.width, size.height * 0.25);
+    path.lineTo(size.width, size.height * 0.30);
     path.lineTo(size.width, 0 );
     path.lineTo( 0, 0);
     //path.lineTo( 0, size.height * 0.5);
 
     canvas.drawPath(path,lapiz);
   }
-
+  
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     // TODO: implement shouldRepaint
     throw UnimplementedError();
   }
+}
 
+class _HeaderTriangularPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final lapiz = Paint();
+
+    //Properties
+    lapiz.color = Color(0xff615AAB);
+    lapiz.style = PaintingStyle.stroke;
+    lapiz.strokeWidth = 20;
+
+    final path = new Path();
+
+    //Dibujar con el path y el lapiz
+    path.lineTo(size.width, size.height);
+    path.lineTo( 0, size.height);
+
+    canvas.drawPath(path,lapiz);
+  }
+  
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    // TODO: implement shouldRepaint
+    throw UnimplementedError();
+  }
 }
